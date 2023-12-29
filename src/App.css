@@ -1,0 +1,11 @@
+*{
+  margin:auto;
+  padding:0;
+  box-sizing: border-box;
+}
+.App {
+  text-align: center;
+  background:url("./assets/bg.png") center center no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+} 

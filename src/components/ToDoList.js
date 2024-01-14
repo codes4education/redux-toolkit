@@ -1,53 +1,54 @@
-import React, {useState}  from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 import DeleteIcon from "../assets/delete.png";
-import { useDispatch } from 'react-redux';
-import {addTodo} from "../store/features/TodoSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addTodo } from "../store/features/TodoSlice";
 
 function ToDoList() {
   const dispatch = useDispatch();
+  const todos = useSelector((state) => state.todo.todos);
   const [newTodo, setNewTodo] = useState("");
 
-  // console.log(newTodo);
+  console.log(todos);
 
   const handleAddTodo = () => {
-    if(newTodo){
-      dispatch(addTodo({id:Date.now(), text:newTodo}));
+    if (newTodo) {
+      dispatch(addTodo({ id: Date.now(), text: newTodo }));
+      setNewTodo("");
     }
-  }
-
+  };
 
   return (
     <Container>
-        <h1>Todo List</h1>
+      <h1>Todo List</h1>
 
-        {/* User Input */}
-        <Wrapper>
-            <input type="text" placeholder='Add a new Todo'
-            onChange={(e)=>setNewTodo(e.target.value)}
-            />
-            <button onClick={handleAddTodo}>Add List</button>
-        </Wrapper>
+      {/* User Input */}
+      <Wrapper>
+        <input
+          type="text"
+          placeholder="Add a new Todo"
+          onChange={(e) => setNewTodo(e.target.value)}
+        />
+        <button onClick={handleAddTodo}>Add List</button>
+      </Wrapper>
 
-        {/* Show Input Content */}
-        <TodoItem>
-            <div className="todoText">Todo - 1</div>
-            <div className="deleteIcon">
-                <img src={DeleteIcon} alt="delete" />
-            </div>
+      {/* Show Input Content */}
+      {todos.map((todo) => (
+        <TodoItem key={todo.id}>
+          <div className="todoText">{todo.text}</div>
+          <div className="deleteIcon">
+            <img src={DeleteIcon} alt="delete" />
+          </div>
         </TodoItem>
+      ))}
 
-        {/* Clear All the content */}
-        <ClearButton>Clear All</ClearButton>
-
-
+      {/* Clear All the content */}
+      <ClearButton>Clear All</ClearButton>
     </Container>
-  )
+  );
 }
 
 export default ToDoList;
-
-
 
 const Container = styled.div`
   display: flex;

@@ -17,7 +17,7 @@ const TodoSlice = createSlice({
     }
 })
 
-console.log('Actions', TodoSlice)
+console.log('Actions', TodoSlice.initialState)
 
 export const {addTodo, deleteTodo, clearTodos} = TodoSlice.actions;
 export default TodoSlice.reducer;

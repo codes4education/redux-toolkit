@@ -1,16 +1,32 @@
-import React from 'react';
+import React, {useState}  from 'react';
 import styled from 'styled-components';
 import DeleteIcon from "../assets/delete.png";
+import { useDispatch } from 'react-redux';
+import {addTodo} from "../store/features/TodoSlice";
 
 function ToDoList() {
+  const dispatch = useDispatch();
+  const [newTodo, setNewTodo] = useState("");
+
+  // console.log(newTodo);
+
+  const handleAddTodo = () => {
+    if(newTodo){
+      dispatch(addTodo({id:Date.now(), text:newTodo}));
+    }
+  }
+
+
   return (
     <Container>
         <h1>Todo List</h1>
 
         {/* User Input */}
         <Wrapper>
-            <input type="text" placeholder='Add a new Todo'/>
-            <button>Add List</button>
+            <input type="text" placeholder='Add a new Todo'
+            onChange={(e)=>setNewTodo(e.target.value)}
+            />
+            <button onClick={handleAddTodo}>Add List</button>
         </Wrapper>
 
         {/* Show Input Content */}

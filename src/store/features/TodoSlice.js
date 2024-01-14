@@ -8,7 +8,10 @@ const TodoSlice = createSlice({
     name:'todo',
     initialState,
     reducers:{
-        addTodo:(state, action)=>{},
+        addTodo:(state, action)=>{
+            state.todos.push(action.payload)
+            console.log('Actions', action.payload)
+        },
         deleteTodo:(state, action)=>{},
         clearTodos:(state, action)=>{},
     }

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import DeleteIcon from "../assets/delete.png";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodo } from "../store/features/TodoSlice";
+import { addTodo, deleteTodo } from "../store/features/TodoSlice";
 
 function ToDoList() {
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ function ToDoList() {
       {todos.map((todo) => (
         <TodoItem key={todo.id}>
           <div className="todoText">{todo.text}</div>
-          <div className="deleteIcon">
+          <div className="deleteIcon" onClick={()=> dispatch(deleteTodo(todo.id))}>
             <img src={DeleteIcon} alt="delete" />
           </div>
         </TodoItem>

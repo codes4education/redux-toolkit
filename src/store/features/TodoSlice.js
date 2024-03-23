@@ -15,7 +15,9 @@ const TodoSlice = createSlice({
         deleteTodo:(state, action)=>{
             state.todos = state.todos.filter((todo) => todo.id !== action.payload)
         },
-        clearTodos:(state, action)=>{},
+        clearTodos:(state, action)=>{
+            state.todos = [];
+        },
     }
 })
 

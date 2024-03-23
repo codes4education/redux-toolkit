@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import DeleteIcon from "../assets/delete.png";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodo, deleteTodo } from "../store/features/TodoSlice";
+import { addTodo, deleteTodo, clearTodos } from "../store/features/TodoSlice";
 
 function ToDoList() {
   const dispatch = useDispatch();
@@ -17,6 +17,11 @@ function ToDoList() {
       setNewTodo("");
     }
   };
+
+  // Clear Todos
+  const handleClearTodos = () =>{
+    dispatch(clearTodos())
+  }
 
   return (
     <Container>
@@ -43,7 +48,10 @@ function ToDoList() {
       ))}
 
       {/* Clear All the content */}
-      <ClearButton>Clear All</ClearButton>
+      {todos.length > 0 && (
+        <ClearButton onClick={handleClearTodos}>Clear All</ClearButton>
+      )}
+      
     </Container>
   );
 }

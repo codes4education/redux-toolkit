@@ -18,10 +18,17 @@ const TodoSlice = createSlice({
         clearTodos:(state, action)=>{
             state.todos = [];
         },
+        updateTodo:(state, action)=>{
+            const {id , newText} = action.payload;
+            const todoToUpdate = state.todos.find(todo => todo.id === id);
+            if(todoToUpdate){
+                todoToUpdate.text = newText;
+            }
+        }
     }
 })
 
 console.log('Actions', TodoSlice.initialState)
 
-export const {addTodo, deleteTodo, clearTodos} = TodoSlice.actions;
+export const {addTodo, deleteTodo, clearTodos, updateTodo} = TodoSlice.actions;
 export default TodoSlice.reducer;
